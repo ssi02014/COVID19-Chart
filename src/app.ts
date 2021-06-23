@@ -7,13 +7,13 @@ function getUnixTimestamp(date) {
 }
 
 // DOM
-const confirmedTotal = $(".confirmed-total");
-const deathsTotal = $(".deaths");
-const recoveredTotal = $(".recovered");
-const lastUpdatedTime = $(".last-updated-time");
-const rankList = $(".rank-list");
-const deathsList = $(".deaths-list");
-const recoveredList = $(".recovered-list");
+const confirmedTotal = document.querySelector(".confirmed-total");
+const deathsTotal = document.querySelector(".deaths");
+const recoveredTotal = document.querySelector(".recovered");
+const lastUpdatedTime = document.querySelector(".last-updated-time");
+const rankList = document.querySelector(".rank-list");
+const deathsList = document.querySelector(".deaths-list");
+const recoveredList = document.querySelector(".recovered-list");
 const deathSpinner = createSpinnerElement("deaths-spinner");
 const recoveredSpinner = createSpinnerElement("recovered-spinner");
 
