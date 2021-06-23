@@ -4,7 +4,8 @@
     "target": "es5",
     "module": "commonjs",
     "outDir": "./built" /* Redirect output structure to the directory. */,
-    "moduleResolution": "node"
+    "moduleResolution": "node",
+    "lib": ["es2015", "DOM", "DOM.Iterable"]
   },
   "include": ["./src/**/*"]
 }
