@@ -7,9 +7,9 @@ function getUnixTimestamp(date: Date) {
 }
 
 // DOM
-var a: Element | HTMLElement | HTMLParagraphElement | HTMLSpanElement;
-const confirmedTotal = $(".confirmed-total") as HTMLSpanElement;
-const deathsTotal = $(".deaths") as HTMLParagraphElement; //타입 단언
+let a: Element | HTMLElement | HTMLParagraphElement | HTMLSpanElement;
+const confirmedTotal = <HTMLSpanElement>$(".confirmed-total"); //타입 단언 방법1
+const deathsTotal = $(".deaths") as HTMLParagraphElement; //타입 방법2
 const recoveredTotal = $(".recovered") as HTMLParagraphElement;
 const lastUpdatedTime = $(".last-updated-time") as HTMLParagraphElement;
 const rankList = $(".rank-list");
@@ -35,7 +35,7 @@ function createSpinnerElement(id: string) {
 
 // state
 let isDeathLoading = false;
-let isRecoveredLoading = false;
+const isRecoveredLoading = false;
 
 //enum
 enum CovidStatus {
@@ -178,7 +178,7 @@ async function setupData() {
 }
 
 function renderChart(data: any, labels: any) {
-  var ctx = $("#lineChart").getContext("2d");
+  const ctx = $("#lineChart").getContext("2d");
   Chart.defaults.global.defaultFontColor = "#f5eaea";
   Chart.defaults.global.defaultFontFamily = "Exo 2";
   new Chart(ctx, {
