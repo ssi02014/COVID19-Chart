@@ -42,13 +42,13 @@ function getUnixTimestamp(date) {
     return new Date(date).getTime();
 }
 // DOM
-var confirmedTotal = document.querySelector(".confirmed-total");
-var deathsTotal = document.querySelector(".deaths");
-var recoveredTotal = document.querySelector(".recovered");
-var lastUpdatedTime = document.querySelector(".last-updated-time");
-var rankList = document.querySelector(".rank-list");
-var deathsList = document.querySelector(".deaths-list");
-var recoveredList = document.querySelector(".recovered-list");
+var confirmedTotal = $(".confirmed-total");
+var deathsTotal = $(".deaths");
+var recoveredTotal = $(".recovered");
+var lastUpdatedTime = $(".last-updated-time");
+var rankList = $(".rank-list");
+var deathsList = $(".deaths-list");
+var recoveredList = $(".recovered-list");
 var deathSpinner = createSpinnerElement("deaths-spinner");
 var recoveredSpinner = createSpinnerElement("recovered-spinner");
 function createSpinnerElement(id) {
