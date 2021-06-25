@@ -1,3 +1,5 @@
+import axios from "axios";
+
 // utils
 function $(selector: string) {
   return document.querySelector(selector);
@@ -7,9 +9,9 @@ function getUnixTimestamp(date: Date) {
 }
 
 // DOM
-let a: Element | HTMLElement | HTMLParagraphElement | HTMLSpanElement;
+// let a: Element | HTMLElement | HTMLParagraphElement | HTMLSpanElement;
 const confirmedTotal = <HTMLSpanElement>$(".confirmed-total"); //타입 단언 방법1
-const deathsTotal = $(".deaths") as HTMLParagraphElement; //타입 방법2
+const deathsTotal = $(".deaths") as HTMLParagraphElement; //타입 단언 방법2
 const recoveredTotal = $(".recovered") as HTMLParagraphElement;
 const lastUpdatedTime = $(".last-updated-time") as HTMLParagraphElement;
 const rankList = $(".rank-list");
