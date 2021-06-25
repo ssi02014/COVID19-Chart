@@ -6,7 +6,8 @@
     "outDir": "./built" /* Redirect output structure to the directory. */,
     "moduleResolution": "node",
     "lib": ["es2015", "DOM", "DOM.Iterable"],
-    "noImplicitAny": true
+    "noImplicitAny": true,
+    "typeRoots": ["./node_modules/@types", "./types"]
   },
   "include": ["./src/**/*"]
 }
