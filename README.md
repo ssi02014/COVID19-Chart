@@ -91,6 +91,27 @@
 
 <br />
 
+### 🏃 4. strict 모드 설정하기
+
+- 타입스크립트 설정 파일에 아래 설정을 추가한다.
+
+```json
+{
+  "strict": true,
+  "strictNullChecks": true,
+  "strictFunctionTypes": true,
+  "strictBindCallApply": true,
+  "strictPropertyInitialization": true,
+  "noImplicitThis": true,
+  "alwaysStrict": true
+}
+```
+
+- `any`로 되어 있는 타입을 최대한 더 적절한 타입으로 변환한다.
+- `as`와 같은 키워드를 최대한 사용하지 않도록 고민해서 변경한다.
+
+<br />
+
 ## 🔍 모듈화 진행을 위한 프로젝트 환경 구성
 
 - [프로젝트 환경 구성]()
