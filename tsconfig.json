@@ -3,7 +3,7 @@
     "allowJs": true /* Enable incremental compilation */,
     "target": "es5",
     "module": "commonjs",
-    "outDir": "./built" /* Redirect output structure to the directory. */,
+    "outDir": "./dist" /* Redirect output structure to the directory. */,
     "moduleResolution": "node",
     "lib": ["es2015", "DOM", "DOM.Iterable"],
     "noImplicitAny": true,
