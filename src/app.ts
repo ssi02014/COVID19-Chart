@@ -1,6 +1,6 @@
 import axios, { AxiosResponse } from "axios";
 import * as Chart from "chart.js";
-import { CovidSummaryResponse } from "./covid/type";
+import { CovidSummaryResponse, CountrySummaryResponse } from "./covid/type";
 
 // utils
 function $(selector: string) {
@@ -54,7 +54,10 @@ function fetchCovidSummary(): Promise<AxiosResponse<CovidSummaryResponse>> {
   return axios.get(url);
 }
 
-function fetchCountryInfo(countryCode: string, status: CovidStatus) {
+function fetchCountryInfo(
+  countryCode: string,
+  status: CovidStatus
+): Promise<AxiosResponse<CountrySummaryResponse>> {
   // status params: confirmed, recovered, deaths
   const url = `https://api.covid19api.com/country/${countryCode}/status/${status}`;
   return axios.get(url);
@@ -73,34 +76,41 @@ function initEvents() {
 
 async function handleListClick(event: any) {
   let selectedId;
+
   if (
     event.target instanceof HTMLParagraphElement ||
     event.target instanceof HTMLSpanElement
   ) {
     selectedId = event.target.parentElement.id;
   }
+
   if (event.target instanceof HTMLLIElement) {
     selectedId = event.target.id;
   }
-  if (isDeathLoading) {
-    return;
-  }
+
+  if (isDeathLoading) return;
+
   clearDeathList();
   clearRecoveredList();
   startLoadingAnimation();
+
   isDeathLoading = true;
+
   const { data: deathResponse } = await fetchCountryInfo(
     selectedId,
     CovidStatus.Deaths
   );
+
   const { data: recoveredResponse } = await fetchCountryInfo(
     selectedId,
     CovidStatus.Recovered
   );
+
   const { data: confirmedResponse } = await fetchCountryInfo(
     selectedId,
     CovidStatus.Confirmed
   );
+
   endLoadingAnimation();
   setDeathsList(deathResponse);
   setTotalDeathsByCountry(deathResponse);
