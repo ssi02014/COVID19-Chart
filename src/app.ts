@@ -8,22 +8,25 @@ import {
 } from "./covid/type";
 
 // utils
-function $(selector: string) {
-  return document.querySelector(selector);
+function $<T extends HTMLElement = HTMLDivElement>(selector: string) {
+  const element = document.querySelector(selector);
+  return <T>element;
+  //return element as T;
 }
+
 function getUnixTimestamp(date: Date | string) {
   return new Date(date).getTime();
 }
 
 // DOM
 // let a: Element | HTMLElement | HTMLParagraphElement | HTMLSpanElement;
-const confirmedTotal = <HTMLSpanElement>$(".confirmed-total"); //타입 단언 방법1
-const deathsTotal = $(".deaths") as HTMLParagraphElement; //타입 단언 방법2
-const recoveredTotal = $(".recovered") as HTMLParagraphElement;
-const lastUpdatedTime = $(".last-updated-time") as HTMLParagraphElement;
-const rankList = $(".rank-list") as HTMLOListElement;
-const deathsList = $(".deaths-list") as HTMLOListElement;
-const recoveredList = $(".recovered-list") as HTMLOListElement;
+const confirmedTotal = <HTMLSpanElement>$(".confirmed-total");
+const deathsTotal = <HTMLParagraphElement>$(".deaths");
+const recoveredTotal = <HTMLParagraphElement>$(".recovered");
+const lastUpdatedTime = <HTMLParagraphElement>$(".last-updated-time");
+const rankList = <HTMLOListElement>$(".rank-list");
+const deathsList = <HTMLOListElement>$(".deaths-list");
+const recoveredList = <HTMLOListElement>$(".recovered-list");
 const deathSpinner = createSpinnerElement("deaths-spinner");
 const recoveredSpinner = createSpinnerElement("recovered-spinner");
 
