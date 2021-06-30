@@ -21,9 +21,9 @@ const confirmedTotal = <HTMLSpanElement>$(".confirmed-total"); //타입 단언 �
 const deathsTotal = $(".deaths") as HTMLParagraphElement; //타입 단언 방법2
 const recoveredTotal = $(".recovered") as HTMLParagraphElement;
 const lastUpdatedTime = $(".last-updated-time") as HTMLParagraphElement;
-const rankList = $(".rank-list");
-const deathsList = $(".deaths-list");
-const recoveredList = $(".recovered-list");
+const rankList = $(".rank-list") as HTMLOListElement;
+const deathsList = $(".deaths-list") as HTMLOListElement;
+const recoveredList = $(".recovered-list") as HTMLOListElement;
 const deathSpinner = createSpinnerElement("deaths-spinner");
 const recoveredSpinner = createSpinnerElement("recovered-spinner");
 
@@ -59,7 +59,7 @@ function fetchCovidSummary(): Promise<AxiosResponse<CovidSummaryResponse>> {
 }
 
 function fetchCountryInfo(
-  countryName: string,
+  countryName: string | undefined,
   status: CovidStatus
 ): Promise<AxiosResponse<CountrySummaryResponse>> {
   // status params: confirmed, recovered, deaths
@@ -75,17 +75,30 @@ function startApp() {
 
 // events
 function initEvents() {
+  if (!rankList) return; //null 경우 오류 해결 방법1
   rankList.addEventListener("click", handleListClick);
 }
 
-async function handleListClick(event: MouseEvent) {
+/*
+  const a: Element;
+  const b: HTMLElement;
+  const c: HTMLDivElement;
+
+  const evt1: Event;
+  const evt2: UIEvent;
+  const evt3: MouseEvent;
+ */
+async function handleListClick(event: Event) {
   let selectedId;
 
   if (
     event.target instanceof HTMLParagraphElement ||
     event.target instanceof HTMLSpanElement
   ) {
-    selectedId = event.target.parentElement.id;
+    //null인 경우 오류 해결 방법2
+    selectedId = event.target.parentElement
+      ? event.target.parentElement.id
+      : undefined;
   }
 
   if (event.target instanceof HTMLLIElement) {
@@ -143,12 +156,13 @@ function setDeathsList(data: CountrySummaryResponse) {
 
     li.appendChild(span);
     li.appendChild(p);
-    deathsList.appendChild(li);
+    deathsList!.appendChild(li); //뒤에 !를 붙이면 이것은 null이 아니다라는 뜻
   });
 }
 
 function clearDeathList() {
-  deathsList.innerHTML = null;
+  if (!deathsList) return;
+  deathsList.innerHTML = "";
 }
 
 function setTotalDeathsByCountry(data: any) {
@@ -173,12 +187,16 @@ function setRecoveredList(data: CountrySummaryResponse) {
 
     li.appendChild(span);
     li.appendChild(p);
-    recoveredList.appendChild(li);
+    recoveredList?.appendChild(li);
+    /*
+      if (recoveredList === null || recoveredList === undefined) return;
+      recoveredList?.appendChild(li);
+    */
   });
 }
 
 function clearRecoveredList() {
-  recoveredList.innerHTML = null;
+  recoveredList.innerHTML = "";
 }
 
 function setTotalRecoveredByCountry(data: CountrySummaryResponse) {
